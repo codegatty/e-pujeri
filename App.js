@@ -49,7 +49,6 @@ export default function App() {
   //push Notification
   useEffect(() => {
     async function pushNotificationController() {
-      await configurePushNotifcation();
       sendPushNotificationHandler(notificationCtx.events);
     }
     pushNotificationController();//this will send the push notification

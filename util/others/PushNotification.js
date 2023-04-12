@@ -6,66 +6,55 @@ import { findDiffBetweenDates } from './findDiffBetweenDates';
 import moment from 'moment';
 
 import { updateIsNotified } from '../http/allEvents';
+import { event } from 'react-native-reanimated';
+
 
 Notification.setNotificationHandler({
-    handleNotification: async () => {
-        return {
-            shouldPlaySound: false,
-            shouldSetBadge: false,
-            shouldShowAlert: true
+    handleNotification:async ()=>{
+        return{
+            shouldPlaySound:false,
+            shouldSetBadge:false,
+            shouldShowAlert:true
         }
     }
-})
+});
+
+function scheduleNotification(title,body,date){
+    /*const trigger=new Date("12/03/2023")
+    trigger.setMinutes(1);
+    trigger.setSeconds(1);
+    Notification.scheduleNotificationAsync({
+        content:{title:title,
+        body:body
+    },
+     trigger,
+    });*/
+
+    const trigger = new Date(Date.now() + 60 * 60 * 1000);
+trigger.setMinutes(0);
+trigger.setSeconds(0);
+
+Notification.scheduleNotificationAsync({
+  content: {
+    title: 'Happy new hour!',
+  },
+  trigger,
+});
+}
 
 export async function sendPushNotificationHandler() {
     const currentDate = moment([]);
     const allNotification = await fetchAllEvents();
-    for (let key in allNotification) {
-        
-        let eventDate = allNotification[key].date;
-        let diffBetweenDate = (findDiffBetweenDates(eventDate, currentDate));
-        if (allNotification[key].notficationType === "event") {
-            if (diffBetweenDate == 0 && allNotification[key].isNotified == false) {
-                //this function is useded to
-                pushNotificationSender(allNotification[key].name,allNotification[key].description,diffBetweenDate)
-               await updateIsNotified(allNotification[key]);//update the is notified to true 
-            }
+    for( let key in allNotification){
+        if(allNotification[key].notficationType=='event'){
+            let diff=findDiffBetweenDates(allNotification[key].date,currentDate);
+            //if(diff==1){
+                scheduleNotification(allNotification[key].name,allNotification[key].description,allNotification[key].date)
+            //}
         }
     }
+
+    //scheduleNotification();
 }
 
-export async function configurePushNotifcation() {
-    const { status } = await Notification.getPermissionsAsync();
-    let finalStatus = status;
 
-    if (finalStatus !== 'granted') {
-        const { status } = await Notification.requestPermissionsAsync();
-        finalStatus = status;
-    }
-
-    if (finalStatus !== 'granted') {
-        console.log("permission not granted");
-    }
-    const pushToken = await Notification.getExpoPushTokenAsync();
-    if (Platform.OS == 'android') {
-        Notification.setNotificationChannelAsync('default', {
-            name: 'default',
-            importance: Notification.AndroidImportance.DEFAULT
-        });
-    }
-}
-
-function pushNotificationSender(eventName,description,differnce){
-    fetch('https://exp.host/--/api/v2/push/send',
-    {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            to: 'ExponentPushToken[D-dqkwHmiI0sRYm-zO2K2c]',
-            title: differnce==0?eventName+`(${differnce} to go)`:eventName,
-            body: description
-        })
-    });
-}
