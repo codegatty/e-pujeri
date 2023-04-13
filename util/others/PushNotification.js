@@ -19,28 +19,49 @@ Notification.setNotificationHandler({
     }
 });
 
-function scheduleNotification(title,body,date){
-    /*const trigger=new Date("12/03/2023")
-    trigger.setMinutes(1);
-    trigger.setSeconds(1);
-    Notification.scheduleNotificationAsync({
-        content:{title:title,
-        body:body
-    },
-     trigger,
-    });*/
+function scheduleNotification1(title,body,date){
 
-    const trigger = new Date(Date.now() + 60 * 60 * 1000);
-trigger.setMinutes(0);
-trigger.setSeconds(0);
 
+    let eDate = new Date(date);
+    //Add 10 seconds to the current date to test it.
+    eDate.setSeconds(eDate.getSeconds() + 10)
 Notification.scheduleNotificationAsync({
   content: {
-    title: 'Happy new hour!',
+    title: title,
+    body:body
   },
-  trigger,
+  trigger:{
+    date:eDate,
+  }
 });
 }
+
+
+function scheduleNotification2(title,body,date){
+    let eDate = new Date(date);
+    //Add 10 seconds to the current date to test it.
+    eDate.setSeconds(eDate.getSeconds() + 10)
+Notification.scheduleNotificationAsync({
+  content: {
+    title: title,
+    body:body
+  },
+  trigger:{
+    seconds:10,
+  }
+});
+    
+}
+async function test(){
+   //await Notification.cancelAllScheduledNotificationsAsync()
+    let val=await Notification.getAllScheduledNotificationsAsync()
+    let key
+    for (key in val){
+        console.log(val[key].identifier,val[key].trigger)
+    }
+    console.log("-----------");
+}
+test()
 
 export async function sendPushNotificationHandler() {
     const currentDate = moment([]);
@@ -48,9 +69,10 @@ export async function sendPushNotificationHandler() {
     for( let key in allNotification){
         if(allNotification[key].notficationType=='event'){
             let diff=findDiffBetweenDates(allNotification[key].date,currentDate);
-            //if(diff==1){
-                scheduleNotification(allNotification[key].name,allNotification[key].description,allNotification[key].date)
-            //}
+            if(diff<=1){
+                scheduleNotification2(allNotification[key].name,allNotification[key].description,allNotification[key].date)
+                scheduleNotification1(allNotification[key].name,allNotification[key].description,allNotification[key].date)
+            }
         }
     }
 
