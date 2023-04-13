@@ -15,7 +15,7 @@ export async function addEvent(eventDetails){
     const responseAnn=await addAnnouncement(annData);
     //anouncement
     const responseIds=[responseEvent.data.name,responseAnn]
-    console.log(responseIds)
+    //console.log(responseIds)
     return responseEvent.data.name;
     
 }

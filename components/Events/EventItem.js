@@ -1,11 +1,31 @@
 import { useNavigation } from '@react-navigation/native';
-import { View, Pressable, Text, StyleSheet } from 'react-native';
+import { View, Pressable, Text, StyleSheet, Button } from 'react-native';
 
 import { globalColors } from '../../constants/appColors';
 import { dateToString } from '../../util/others/dateToString';
+import { PushNotificationHandler} from '../../util/others/pNotification';
+import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
 
 
 function EventItem({data,onPress}) {
+    let btton;
+    const diff=findDiffBetweenDates(data.date,new Date())
+    function onPressPushHandler(){
+       
+
+        if(diff==1 ||diff==0){
+            PushNotificationHandler(data.event,data.about)
+            btton=<Button title='push' onPress={onPressPushHandler}/>
+        }
+    }
+
+    function isDisable(){
+        if(diff==1||diff==0){
+            return <Button title='push' onPress={onPressPushHandler}/>
+        }else{
+            return <Button title='push' disabled/>
+        }
+    }
     function onPressHandler(){
         onPress(data)
     }
@@ -18,6 +38,10 @@ function EventItem({data,onPress}) {
             <View style={styles.detailContainer}>
                 <Text style={styles.detail}>Type of Event: {data.type}</Text>
                 <Text style={styles.detail}>publishedDate: {dateToString(data.publishedDate)}</Text>
+                
+            </View>
+            <View>
+            {isDisable()}
             </View>
         </Pressable>
     );

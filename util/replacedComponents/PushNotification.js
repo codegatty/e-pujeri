@@ -2,24 +2,16 @@
 import { Platform } from 'react-native';
 import * as Notification from 'expo-notifications';
 import { fetchAllEvents } from '../http/allEvents';
-import { findDiffBetweenDates } from './findDiffBetweenDates';
+import { findDiffBetweenDates } from '../others/findDiffBetweenDates';
 import moment from 'moment';
 
 import { updateIsNotified } from '../http/allEvents';
 import { event } from 'react-native-reanimated';
 
 
-Notification.setNotificationHandler({
-    handleNotification:async ()=>{
-        return{
-            shouldPlaySound:false,
-            shouldSetBadge:false,
-            shouldShowAlert:true
-        }
-    }
-});
 
-function scheduleNotification1(title,body,date){
+
+function scheduleNotification1(title,body,date,channel){
 
 
     let eDate = new Date(date);
@@ -32,12 +24,13 @@ Notification.scheduleNotificationAsync({
   },
   trigger:{
     date:eDate,
+    channelId:channel
   }
 });
 }
 
 
-function scheduleNotification2(title,body,date){
+function scheduleNotification2(title,body,date,channel){
     let eDate = new Date(date);
     //Add 10 seconds to the current date to test it.
     eDate.setSeconds(eDate.getSeconds() + 10)
@@ -48,6 +41,7 @@ Notification.scheduleNotificationAsync({
   },
   trigger:{
     seconds:10,
+    channelId:channel
   }
 });
     
@@ -70,8 +64,14 @@ export async function sendPushNotificationHandler() {
         if(allNotification[key].notficationType=='event'){
             let diff=findDiffBetweenDates(allNotification[key].date,currentDate);
             if(diff<=1){
-                scheduleNotification2(allNotification[key].name,allNotification[key].description,allNotification[key].date)
-                scheduleNotification1(allNotification[key].name,allNotification[key].description,allNotification[key].date)
+                scheduleNotification2(allNotification[key].name,
+                  allNotification[key].description,
+                  allNotification[key].date,
+                  allNotification[key].id)
+                scheduleNotification1(allNotification[key].name,
+                  allNotification[key].description,
+                  allNotification[key].date,
+                  allNotification[key].id)
             }
         }
     }

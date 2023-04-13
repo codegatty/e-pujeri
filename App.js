@@ -1,12 +1,13 @@
 import { useContext, useEffect } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+import * as notification from 'expo-notifications';
+import { Platform } from 'react-native';
 
 
 //Contexts
@@ -35,8 +36,10 @@ import { globalColors } from './constants/appColors';
 import { AdminAuthContext } from './store/adminAuth-context';
 import CustomButton from './components/ui/CustomButton';
 import AdminHeader from './components/Header/AdminHeader';
-import { configurePushNotifcation } from './util/others/PushNotification';
-import { sendPushNotificationHandler } from './util/others/PushNotification';
+import {PushNotificationHandler} from './util/others/pNotification'
+import { not } from 'react-native-reanimated';
+import { configurePushNotifcation } from './util/others/pNotification';
+//import { sendPushNotificationHandler } from './util/others/PushNotification';
 
 export default function App() {
   //notificationContext
@@ -48,10 +51,27 @@ export default function App() {
 
   //push Notification
   useEffect(() => {
-    async function pushNotificationController() {
-      sendPushNotificationHandler(notificationCtx.events);
+    async function configurePushNotifcation(){
+      const {status}=await notification.getPermissionsAsync();
+      let finalStatus=status;
+
+      if(finalStatus!=='granted'){
+        const {status}=notification.requestPermissionsAsync();
+        finalStatus=status;
+      }
+      if(finalStatus!=='granted'){
+        Alert.alert('Permision require','fuck you bitch')
+        return
+      }
+      const pushTokenData=await notification.getExpoPushTokenAsync();
+      if(Platform.OS==='android'){
+        notification.getNotificationChannelAsync('default',{
+          name:'default',
+          importance:notification.AndroidImportance.DEFAULT
+        })
+      }
     }
-    pushNotificationController();//this will send the push notification
+    configurePushNotifcation();
   }, [])
   //push notification
   function DrawerNavigation() {
