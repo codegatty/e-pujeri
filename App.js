@@ -144,7 +144,7 @@ export default function App() {
           tabBarIcon: ({ color, size }) => <Ionicons name="list" color={color} size={size} />,
           title: 'Events',
           headerRight: ({ size }) => <AdminHeader screen='events' size={size} />
-        }} />
+        }} initialParams={{allInfo:false}}/>{/*initialParams is used to passs intial parameters*/}
         <BottomTab.Screen name='About' component={About} options={{
           tabBarIcon: ({ color, size }) => <Ionicons name="information" color={color} size={size} />,
           title: 'About',

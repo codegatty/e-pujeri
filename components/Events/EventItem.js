@@ -15,15 +15,15 @@ function EventItem({data,onPress}) {
 
         if(diff==1 ||diff==0){
             PushNotificationHandler(data.event,data.about)
-            btton=<Button title='push' onPress={onPressPushHandler}/>
+            btton=<Button title='Notify' onPress={onPressPushHandler}/>
         }
     }
 
     function isDisable(){
         if(diff==1||diff==0){
-            return <Button title='push' onPress={onPressPushHandler}/>
+            return <Button title='Notify' onPress={onPressPushHandler}/>
         }else{
-            return <Button title='push' disabled/>
+            return <Button title='Notify' disabled/>
         }
     }
     function onPressHandler(){

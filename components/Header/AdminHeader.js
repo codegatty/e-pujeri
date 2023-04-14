@@ -1,14 +1,19 @@
 import { useNavigation } from '@react-navigation/native';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet ,Button,Text} from 'react-native';
 
 import IconButton from '../ui/IconButon';
 import { globalColors } from '../../constants/appColors';
+import CustomButton from '../ui/CustomButton';
 
 
 function AdminHeader({screen,size}) {
 
     const Navigation = useNavigation();
     let ele='';
+
+    function allEventsHandler(){
+        Navigation.navigate('Events',{allInfo:true})
+    }
 
     function iconButtonOnpressFunction(screen) {
         if(screen==='events'){
@@ -23,12 +28,18 @@ function AdminHeader({screen,size}) {
         ele=<View></View>  
     }else if(screen==='events'){
          ele=<View style={styles.container}>
+        <CustomButton 
+        style2={styles.label} 
+        style3={styles.button} 
+        style1={styles.buttonContainer}
+        onPress={allEventsHandler}>All</CustomButton>
         <IconButton 
         name='add' 
         size={30} 
         color={globalColors.colors.primary100} 
         onPress={iconButtonOnpressFunction.bind(this,'events')} 
-        style1={{marginRight:10}} />
+        style1={{marginRight:10,marginLeft:10}} />
+        
     </View>;
     }
     else if(screen==='announcements'){
@@ -57,6 +68,22 @@ export default AdminHeader;
 const styles = StyleSheet.create({
     container: {
         flexDirection:'row'
-        
+    },
+    label:{
+        fontSize:13,
+        fontWeight:'bold',
+        letterSpacing:2,
+        color:globalColors.colors.primary100,
+        position:'absolute',
+        textAlign:'center'
+    },
+    button:{
+        backgroundColor:globalColors.colors.primaryBackground,
+        paddingHorizontal:14,
+
+    },
+    buttonContainer:{
+        alignContent:'center',
+        justifyContent:'center',
     }
 })

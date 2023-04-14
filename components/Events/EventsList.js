@@ -5,10 +5,17 @@ import { dateToString } from '../../util/others/dateToString';
 import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
 
 import EventItem from "./EventItem";
-function EventsList({dataSource}){
+import { useEffect } from 'react';
+function EventsList({dataSource,showAllEvents}){
 
     const Navigation=useNavigation();
     let moment=require('moment');
+    if(showAllEvents==true){
+    dataSource=dataSource.filter((items)=>{
+        let diff=findDiffBetweenDates(items.date,new Date())
+        return diff<1
+    })
+    }
 
     function onPressHandler(eventData){
         /*eventDataInString is used to supprss the error while routing data using route prop of navigation

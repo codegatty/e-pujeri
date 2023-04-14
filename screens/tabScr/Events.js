@@ -6,19 +6,20 @@ import { EventContext } from '../../store/events-context';
 import { fetchEvents } from '../../util/http/eventHttp';
 import ErrorOverlay from '../../components/ui/ErrorOverlay';
 import LoadingOverlay from '../../components/ui/LoadingOverlay';
+import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
 
-function Events(){
+function Events({route}){
     const eventCtx=useContext(EventContext);
     const Navigation=useNavigation();
 
     const [error,setError]=useState(false);
     const [loading,setLoading]=useState(false);
-
     useEffect(()=>{
         async function eventFetchHandler(){
             setLoading(true)
             try{
                 const allEvents=await fetchEvents();
+                console.log(allEvents)
                 eventCtx.storeEvents(allEvents);
             }catch(e){
                 setError(true);
@@ -26,6 +27,7 @@ function Events(){
             setLoading(false);
         }
         eventFetchHandler();
+
     },[])
 
     function errorLayoutHandler(){
@@ -41,7 +43,7 @@ function Events(){
     }
     
     return (
-        <EventsList dataSource={eventCtx.events}/>
+        <EventsList dataSource={eventCtx.events} showAllEvents={route.params.allInfo}/>
     );
 }
 

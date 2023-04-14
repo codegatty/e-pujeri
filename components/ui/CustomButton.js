@@ -23,7 +23,7 @@ export default CustomButton;
 const styles=StyleSheet.create({
     container:{
         overflow:'hidden',
-        elevation:5
+        elevation:5,
     },
     pressable:{         
         backgroundColor:globalColors.colors.primary300,
