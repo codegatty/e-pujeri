@@ -4,15 +4,30 @@ import { View, StyleSheet ,Button,Text} from 'react-native';
 import IconButton from '../ui/IconButon';
 import { globalColors } from '../../constants/appColors';
 import CustomButton from '../ui/CustomButton';
+import { ShowAllEventContext } from '../../store/showAllEvent-context';
+import { useContext } from 'react';
 
 
 function AdminHeader({screen,size}) {
 
     const Navigation = useNavigation();
+    const allEventCtx=useContext(ShowAllEventContext);
+    
     let ele='';
 
     function allEventsHandler(){
         Navigation.navigate('Events',{allInfo:true})
+        if(allEventCtx.shouldShow==true){
+            allEventCtx.shouldShow=false
+        }else if(allEventCtx.shouldShow==false){
+            allEventCtx.shouldShow=true
+        }
+    }
+    function labelHandler(){
+        if(allEventCtx.shouldShow==true)
+            return 'Few'
+        else
+            return 'All'
     }
 
     function iconButtonOnpressFunction(screen) {
@@ -32,7 +47,7 @@ function AdminHeader({screen,size}) {
         style2={styles.label} 
         style3={styles.button} 
         style1={styles.buttonContainer}
-        onPress={allEventsHandler}>All</CustomButton>
+        onPress={allEventsHandler}>{labelHandler()}</CustomButton>
         <IconButton 
         name='add' 
         size={30} 

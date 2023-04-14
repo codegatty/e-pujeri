@@ -11,8 +11,7 @@ function EventItem({data,onPress}) {
     let btton;
     const diff=findDiffBetweenDates(data.date,new Date())
     function onPressPushHandler(){
-       
-
+    
         if(diff==1 ||diff==0){
             PushNotificationHandler(data.event,data.about)
             btton=<Button title='Notify' onPress={onPressPushHandler}/>
@@ -21,9 +20,9 @@ function EventItem({data,onPress}) {
 
     function isDisable(){
         if(diff==1||diff==0){
-            return <Button title='Notify' onPress={onPressPushHandler}/>
+            return <Button title='Notify' onPress={onPressPushHandler} color={globalColors.colors.primary300}/>
         }else{
-            return <Button title='Notify' disabled/>
+            return <Button title='Notify' disabled />
         }
     }
     function onPressHandler(){

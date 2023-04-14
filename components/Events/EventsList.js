@@ -1,19 +1,23 @@
+import { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {FlatList,View} from 'react-native';
 
+
 import { dateToString } from '../../util/others/dateToString';
 import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
-
+import { ShowAllEventContext} from '../../store/showAllEvent-context';
 import EventItem from "./EventItem";
 import { useEffect } from 'react';
 function EventsList({dataSource,showAllEvents}){
 
     const Navigation=useNavigation();
+    const allEventCtx=useContext(ShowAllEventContext)
     let moment=require('moment');
-    if(showAllEvents==true){
+
+    if(allEventCtx.shouldShow==false){
     dataSource=dataSource.filter((items)=>{
         let diff=findDiffBetweenDates(items.date,new Date())
-        return diff<1
+        return diff<2
     })
     }
 
