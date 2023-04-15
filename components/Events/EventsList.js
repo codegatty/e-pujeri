@@ -8,7 +8,7 @@ import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
 import { ShowAllEventContext} from '../../store/showAllEvent-context';
 import EventItem from "./EventItem";
 import { useEffect } from 'react';
-function EventsList({dataSource,showAllEvents}){
+function EventsList({dataSource}){
 
     const Navigation=useNavigation();
     const allEventCtx=useContext(ShowAllEventContext)

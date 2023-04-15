@@ -8,7 +8,7 @@ import ErrorOverlay from '../../components/ui/ErrorOverlay';
 import LoadingOverlay from '../../components/ui/LoadingOverlay';
 import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
 
-function Events({route}){
+function Events(){
     const eventCtx=useContext(EventContext);
     const Navigation=useNavigation();
 
@@ -43,7 +43,7 @@ function Events({route}){
     }
     
     return (
-        <EventsList dataSource={eventCtx.events} showAllEvents={route.params.allInfo}/>
+        <EventsList dataSource={eventCtx.events}/>
     );
 }
 

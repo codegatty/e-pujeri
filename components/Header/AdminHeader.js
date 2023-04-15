@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, StyleSheet ,Button,Text} from 'react-native';
 
@@ -5,26 +6,43 @@ import IconButton from '../ui/IconButon';
 import { globalColors } from '../../constants/appColors';
 import CustomButton from '../ui/CustomButton';
 import { ShowAllEventContext } from '../../store/showAllEvent-context';
-import { useContext } from 'react';
+import { ShowAllNotifcationContext } from '../../store/showAllNotification-Context';
 
 
 function AdminHeader({screen,size}) {
 
     const Navigation = useNavigation();
     const allEventCtx=useContext(ShowAllEventContext);
-    
+    const allNotificationCtx=useContext(ShowAllNotifcationContext);
+
     let ele='';
 
+    function allNotificationHandler(){
+        Navigation.navigate('Announcements')
+        if(allNotificationCtx.shouldShow==true){
+            allNotificationCtx.toShouldShow(false)
+        }else if(allNotificationCtx.shouldShow==false){
+            allNotificationCtx.toShouldShow(true)
+        }    
+    }
+
     function allEventsHandler(){
-        Navigation.navigate('Events',{allInfo:true})
+        Navigation.navigate('Events')
         if(allEventCtx.shouldShow==true){
             allEventCtx.shouldShow=false
         }else if(allEventCtx.shouldShow==false){
             allEventCtx.shouldShow=true
         }
     }
-    function labelHandler(){
+    function eventLabelHandler(){
         if(allEventCtx.shouldShow==true)
+            return 'Few'
+        else
+            return 'All'
+    }
+
+    function notificationLabelHandler(){
+        if(allNotificationCtx.shouldShow==true)
             return 'Few'
         else
             return 'All'
@@ -47,7 +65,7 @@ function AdminHeader({screen,size}) {
         style2={styles.label} 
         style3={styles.button} 
         style1={styles.buttonContainer}
-        onPress={allEventsHandler}>{labelHandler()}</CustomButton>
+        onPress={allEventsHandler}>{eventLabelHandler()}</CustomButton>
         <IconButton 
         name='add' 
         size={30} 
@@ -59,6 +77,12 @@ function AdminHeader({screen,size}) {
     }
     else if(screen==='announcements'){
          ele=<View style={styles.container}>
+            <CustomButton 
+            style2={styles.label} 
+            style3={styles.button} 
+            style1={styles.buttonContainer}
+            onPress={allNotificationHandler}>{notificationLabelHandler()}</CustomButton>
+
             <IconButton 
             name='add' 
             size={30} 

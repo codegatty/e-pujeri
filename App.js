@@ -17,6 +17,7 @@ import AnnouncementContextProvider from './store/announcements-context';
 import NotificationContextProvider from './store/allEvents-context';
 import { AllEventsContext } from './store/allEvents-context';
 import ShowAllEventProvider from './store/showAllEvent-context';
+import ShowAllNoificationProvider from './store/showAllNotification-Context';
 
 //Drawer
 import AdminScreen from './screens/drawerScr/AdminScreen';
@@ -194,9 +195,11 @@ export default function App() {
           <AnnouncementContextProvider>
             <NotificationContextProvider>
               <ShowAllEventProvider>
+              <ShowAllNoificationProvider>
               <NavigationContainer>
                 <DrawerNavigation />
               </NavigationContainer>
+              </ShowAllNoificationProvider>
               </ShowAllEventProvider>
             </NotificationContextProvider>
           </AnnouncementContextProvider>
