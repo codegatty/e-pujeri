@@ -4,8 +4,9 @@ import Title from '../../components/ui/Title';
 import Detail from '../../components/ui/Detail';
 
 
-function About(){
-    
+function About({route}){
+    const userType=route.params.userType;
+    //user type can be used to restrict some functions for normal user
     return(
         <ScrollView>
         <View style={styles.rootContainer}><View style={styles.titleContainer}>

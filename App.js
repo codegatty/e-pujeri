@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as notification from 'expo-notifications';
 import { Platform } from 'react-native';
+import { Text } from 'react-native';
 
 
 //Contexts
@@ -18,7 +19,7 @@ import NotificationContextProvider from './store/allEvents-context';
 import { AllEventsContext } from './store/allEvents-context';
 import ShowAllEventProvider from './store/showAllEvent-context';
 import ShowAllNoificationProvider from './store/showAllNotification-Context';
-
+import NotificationViewProvider from './store/notificationView-context';
 //Drawer
 import AdminScreen from './screens/drawerScr/AdminScreen';
 import UserScreen from './screens/drawerScr/UserScreen';
@@ -39,6 +40,7 @@ import { globalColors } from './constants/appColors';
 import { AdminAuthContext } from './store/adminAuth-context';
 import CustomButton from './components/ui/CustomButton';
 import AdminHeader from './components/Header/AdminHeader';
+import UserHeader from './components/Header/UserHeader';
 import {PushNotificationHandler} from './util/others/pNotification'
 import { not } from 'react-native-reanimated';
 import { configurePushNotifcation } from './util/others/pNotification';
@@ -152,7 +154,7 @@ export default function App() {
           tabBarIcon: ({ color, size }) => <Ionicons name="information" color={color} size={size} />,
           title: 'About',
           headerRight: ({ size }) => <AdminHeader screen='about' size={size} />
-        }} />
+        }} initialParams={{userType:'admin'}}/>
       </BottomTab.Navigator>
     );
   }
@@ -180,8 +182,15 @@ export default function App() {
         tabBarActiveTintColor: globalColors.colors.primary200,
       }}>
         <BottomTab.Screen name="Notifications" component={Notifications} options={{
-          tabBarIcon: ({ color, size }) => <Ionicons name='notifications' color={color} size={size} />
+          tabBarIcon: ({ color, size }) => <Ionicons name='notifications' color={color} size={size} />,
+          headerRight:()=><UserHeader screen="notifications"/>
         }} />
+
+        <BottomTab.Screen name='About' component={About} options={{
+          tabBarIcon: ({ color, size }) => <Ionicons name="information" color={color} size={size} />,
+          title: 'About',
+          headerRight: ({ size }) => <AdminHeader screen='about' size={size} />
+        }} initialParams={{userType:'user'}}/>
       </BottomTab.Navigator>
     );
   }
@@ -196,9 +205,11 @@ export default function App() {
             <NotificationContextProvider>
               <ShowAllEventProvider>
               <ShowAllNoificationProvider>
+              <NotificationViewProvider>
               <NavigationContainer>
                 <DrawerNavigation />
               </NavigationContainer>
+              </NotificationViewProvider>
               </ShowAllNoificationProvider>
               </ShowAllEventProvider>
             </NotificationContextProvider>

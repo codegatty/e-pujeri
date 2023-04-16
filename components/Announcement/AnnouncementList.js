@@ -12,7 +12,7 @@ function AnnouncementList({dataSource}){
     if(AllNotificationCtx.shouldShow==false){
         dataSource=dataSource.filter((items)=>{
             let diff=findDiffBetweenDates(items.publishedDate,new Date())
-            return diff>0
+            return diff==0
         })
     }
 
