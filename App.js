@@ -8,7 +8,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as notification from 'expo-notifications';
 import { Platform } from 'react-native';
-import { Text } from 'react-native';
 
 
 //Contexts
@@ -16,7 +15,6 @@ import AdminAuthProvider from './store/adminAuth-context';
 import EventContextProvider from './store/events-context';
 import AnnouncementContextProvider from './store/announcements-context';
 import NotificationContextProvider from './store/allEvents-context';
-import { AllEventsContext } from './store/allEvents-context';
 import ShowAllEventProvider from './store/showAllEvent-context';
 import ShowAllNoificationProvider from './store/showAllNotification-Context';
 import NotificationViewProvider from './store/notificationView-context';
@@ -41,14 +39,10 @@ import { AdminAuthContext } from './store/adminAuth-context';
 import CustomButton from './components/ui/CustomButton';
 import AdminHeader from './components/Header/AdminHeader';
 import UserHeader from './components/Header/UserHeader';
-import {PushNotificationHandler} from './util/others/pNotification'
-import { not } from 'react-native-reanimated';
-import { configurePushNotifcation } from './util/others/pNotification';
 //import { sendPushNotificationHandler } from './util/others/PushNotification';
 
 export default function App() {
-  //notificationContext
-  const notificationCtx=useContext(AllEventsContext);
+
   //Navigation variables
   const Drawer = createDrawerNavigator();
   const BottomTab = createBottomTabNavigator();
@@ -65,7 +59,7 @@ export default function App() {
         finalStatus=status;
       }
       if(finalStatus!=='granted'){
-        Alert.alert('Permision require','fuck you bitch')
+        Alert.alert('Permision require','please ensure that you enabled push notification for this app')
         return
       }
       const pushTokenData=await notification.getExpoPushTokenAsync();

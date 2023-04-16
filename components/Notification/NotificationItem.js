@@ -15,7 +15,7 @@ function NotificationItem({data}){
             eventDate:data.date?data.date:'',
             eventType:data.type?data.type:'',
             eventDate:data.date?data.date:'',
-            eventIsYearly:!(data.isYearlyEvent)?data.isYearlyEvent:''
+            eventIsYearly:(data.isYearlyEvent)?data.isYearlyEvent:' '
         }
         Navigation.navigate("NotificationSummery",{notiData:notificationData});
     }

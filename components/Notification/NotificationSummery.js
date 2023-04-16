@@ -4,6 +4,7 @@ import NotificationDetails from "./NotificationDetails";
 
 function NotificationSummery({ route }) {
     const notificationData = route.params.notiData;
+   
     return (
         <View style={styles.mainContainer}>
             <View style={styles.detailContainer}>

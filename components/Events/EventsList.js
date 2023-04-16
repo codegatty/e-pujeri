@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import {FlatList,View} from 'react-native';
+import {FlatList} from 'react-native';
 
 
 import { dateToString } from '../../util/others/dateToString';
 import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
 import { ShowAllEventContext} from '../../store/showAllEvent-context';
 import EventItem from "./EventItem";
-import { useEffect } from 'react';
+
 function EventsList({dataSource}){
 
     const Navigation=useNavigation();
@@ -36,7 +36,7 @@ function EventsList({dataSource}){
             currentDays:findDiffBetweenDates(eventData.date,moment([])),
             totalDays:eventData.days
         };
-        console.log(typeof(eventData.isNotified))
+        
         Navigation.navigate('EventSummery',{eventData:eventDataInString})
     }
     function renderHandler(itemData){

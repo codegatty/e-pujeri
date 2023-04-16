@@ -1,20 +1,38 @@
-import { useContext } from 'react';
+import { useContext,useState } from 'react';
 import {View,StyleSheet} from 'react-native';
 
 import AnnouncementDetails from './AnnouncementDetails';
 import CustomButton from '../ui/CustomButton';
 import {deleteAnnouncement,updateAnnouncement} from '../../util/http/announcementHttp';
 import { AnnouncementContext } from '../../store/announcements-context';
+import ErrorOverlay from '../ui/ErrorOverlay';
+import LoadingOverlay from '../ui/LoadingOverlay';
 
 function AnnouncementSummery({route,navigation}){
 
     const annCtx=useContext(AnnouncementContext);
+    const [isError,setError]=useState(false);
+    const [isLoading,setLoading]=useState(false);
 
     const annData=route.params.annData;
     async function deleteHandler(){
+        setLoading(true)
+        try{
         await deleteAnnouncement(annData.id);
         annCtx.deleteAnnouncement(annData.id);
         navigation.navigate("Announcements");
+        }catch(e){
+            setLoading(false);
+            setError(true);
+        }
+    }
+
+    if(isError){
+        return <ErrorOverlay/>
+    }
+
+    if(isLoading){
+        return <LoadingOverlay/>
     }
 
     function updateHandler(){

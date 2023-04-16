@@ -29,7 +29,7 @@ function UserHeader({screen}){
         style3={styles.button} 
         style1={styles.buttonContainer}
         onPress={onPressHandler}
-        >all</CustomButton>
+        >{notificationViewCtx.mode}</CustomButton>
         </View>;
     }
     return(

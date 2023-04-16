@@ -8,14 +8,11 @@ import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
 
 
 function EventItem({data,onPress}) {
-    let btton;
-    const diff=findDiffBetweenDates(data.date,new Date())
-    function onPressPushHandler(){
     
-        if(diff==1 ||diff==0){
+    const diff=findDiffBetweenDates(data.date,new Date())
+   
+    function onPressPushHandler(){
             PushNotificationHandler(data.event,data.about)
-            btton=<Button title='Notify' onPress={onPressPushHandler}/>
-        }
     }
 
     function isDisable(){

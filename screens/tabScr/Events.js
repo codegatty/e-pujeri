@@ -6,7 +6,6 @@ import { EventContext } from '../../store/events-context';
 import { fetchEvents } from '../../util/http/eventHttp';
 import ErrorOverlay from '../../components/ui/ErrorOverlay';
 import LoadingOverlay from '../../components/ui/LoadingOverlay';
-import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
 
 function Events(){
     const eventCtx=useContext(EventContext);
@@ -19,7 +18,6 @@ function Events(){
             setLoading(true)
             try{
                 const allEvents=await fetchEvents();
-                console.log(allEvents)
                 eventCtx.storeEvents(allEvents);
             }catch(e){
                 setError(true);

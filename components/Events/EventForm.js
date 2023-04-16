@@ -9,7 +9,6 @@ import { globalColors } from '../../constants/appColors'
 import CustomButton from '../ui/CustomButton';
 import EventType from './EventType';
 import {dateToString} from '../../util/others/dateToString';
-import { onChange } from 'react-native-reanimated';
 
 function EventForm({ onAddEvent, defaultValue, submitButtonTitle ,onSubmit}) {
 
