@@ -19,6 +19,7 @@ function Events(){
             try{
                 const allEvents=await fetchEvents();
                 eventCtx.storeEvents(allEvents);
+                
             }catch(e){
                 setError(true);
             }

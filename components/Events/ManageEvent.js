@@ -38,7 +38,7 @@ function ManageEvent({ route, navigation }) {
                     publishDate: eventData.publishedDate
                 };
                 const responseIds = await addEvent(eventData);
-                eventCtx.addEvent({ ...eventData, id: responseIds[0], isNotified: false });
+                eventCtx.addEvent({ ...eventData, id: responseIds, isNotified: false });
                 //announcement creating from event
                 annCtx.addAnnouncement({...annData,id:responseIds[1]});
                 //annoucement

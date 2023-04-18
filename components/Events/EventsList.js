@@ -9,7 +9,6 @@ import { ShowAllEventContext} from '../../store/showAllEvent-context';
 import EventItem from "./EventItem";
 
 function EventsList({dataSource}){
-
     const Navigation=useNavigation();
     const allEventCtx=useContext(ShowAllEventContext)
     let moment=require('moment');
@@ -39,8 +38,9 @@ function EventsList({dataSource}){
         
         Navigation.navigate('EventSummery',{eventData:eventDataInString})
     }
+    
     function renderHandler(itemData){
-    return <EventItem data={itemData.item} onPress={onPressHandler.bind(this,itemData.item)}/>
+    return <EventItem data={itemData.item} onPress={onPressHandler.bind(this,itemData.item)} />
     }
     return(
         <FlatList data={dataSource} renderItem={renderHandler} keyExtractor={(item)=>item.id}/>

@@ -22,6 +22,18 @@ function NotificationItem({data}){
         Navigation.navigate("NotificationSummery",{notiData:notificationData});
     }
 
+    function eventTagHandler(){
+        const type=data.type;
+        switch(type){
+            case 'varshika':return({backgroundColor:'grey'})
+            case 'meeting':return({backgroundColor:'green'})
+            case 'pooja':return({backgroundColor:'brown'})
+            case 'ame':return({backgroundColor:'purple'})
+            case 'soothaka':return({backgroundColor:'black'})
+        }
+
+    }
+
     
     function tagHandler(){
         if(data.notficationType==='event'){
@@ -47,8 +59,8 @@ return(
     <View style={styles.mainTagContainer}>
         <View style={styles.tagContainer}>
         {tagHandler()}
-        <Tag style1={[data.notficationType==='event'?{backgroundColor:'green'}:{backgroundColor:'blue'},styles.tag]}>
-            {data.notficationType==='event'?'Event':'Announcemnet'}</Tag>
+        <Tag style1={[data.notficationType==='event'?eventTagHandler():{backgroundColor:'blue'},styles.tag]}>
+            {data.notficationType==='event'?data.type:'Announcemnet'}</Tag>
         </View>
     </View>
 </Pressable>

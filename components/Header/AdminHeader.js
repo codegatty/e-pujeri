@@ -36,14 +36,14 @@ function AdminHeader({screen,size}) {
     }
     function eventLabelHandler(){
         if(allEventCtx.shouldShow==true)
-            return 'Few'
+            return 'Less'
         else
             return 'more'
     }
 
     function notificationLabelHandler(){
         if(allNotificationCtx.shouldShow==true)
-            return 'Few'
+            return 'Less'
         else
             return 'All'
     }

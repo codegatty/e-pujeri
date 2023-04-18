@@ -17,7 +17,7 @@ function NotificationList({data}){
         return <NotificationItem data={item.item}/>
     }
     return(<>
-        <FlatList data={data}renderItem={renderHandler} keyExtractor={(item)=>item.id}/>
+        <FlatList data={data} renderItem={renderHandler} keyExtractor={(item)=>item.id}/>
         
         </>
     );
