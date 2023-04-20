@@ -1,4 +1,5 @@
 import * as Notification from 'expo-notifications';
+import { fetchTokensFromDatabase } from '../http/pushTokenHttp';
 Notification.setNotificationHandler({
     handleNotification:async()=>{
         return{
@@ -9,8 +10,8 @@ Notification.setNotificationHandler({
     }
 })    
 export  async function PushNotificationHandler(name,description){
-
-
+    const tokens=fetchTokensFromDatabase();
+    console.log(tokens);
     await configurePushNotifcation();
     fetch('https://exp.host/--/api/v2/push/send',
     {

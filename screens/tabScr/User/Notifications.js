@@ -21,8 +21,10 @@ function Notification(){
             try{
             const allNotification=await fetchAllEvents();
             notificationCtx.setEvents(allNotification);
-            await updateNotificationSentTrue();
+            console.log(notificationCtx.events)
+            //await updateNotificationSentTrue();
             }catch(e){
+                
                 setError(true)
             }
             setLoading(false)
@@ -31,7 +33,7 @@ function Notification(){
     },[])
 
     if(error){
-        return <ErrorOverlay message="Could not fetch data from database !" onPress={errorLayoutHandler}/>
+        return <ErrorOverlay message="Could not fetch data from database !"/>
     }
 
     if(loading){

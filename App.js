@@ -40,6 +40,7 @@ import CustomButton from './components/ui/CustomButton';
 import AdminHeader from './components/Header/AdminHeader';
 import UserHeader from './components/Header/UserHeader';
 //import { sendPushNotificationHandler } from './util/others/PushNotification';
+import { addTokenToDatabasae } from './util/http/pushTokenHttp';
 
 export default function App() {
 
@@ -47,6 +48,15 @@ export default function App() {
   const Drawer = createDrawerNavigator();
   const BottomTab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator();
+  
+  //obtainign push token
+  useEffect(()=>{ 
+    notification.getExpoPushTokenAsync().then((token)=>{
+      addTokenToDatabasae(token.data);
+    }).catch(()=>{Alert.alert("getExpoPushAsync() problem",'contact developer of this appp')})
+  },[])
+
+  //obtaing push token
 
   //push Notification
   useEffect(() => {
