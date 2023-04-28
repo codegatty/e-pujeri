@@ -1,4 +1,5 @@
 import * as Notification from 'expo-notifications';
+import { PushNotificationHandler } from '../others/pNotification';
 import axios from "axios";
 
 const URL="https://epujeri-d5ced-default-rtdb.firebaseio.com/";
@@ -6,7 +7,8 @@ const URL="https://epujeri-d5ced-default-rtdb.firebaseio.com/";
 
 export async function addAnnouncement(annData){
     const response=await axios.post(URL+"/announcement.json",annData);
-    await sendPushNotificationHandler(annData.name,annData.description);
+    //await sendPushNotificationHandler(annData.name,annData.description);
+    await PushNotificationHandler(annData.name,annData.description)
     return response.data.name;
 }
 

@@ -9,6 +9,8 @@ import ErrorOverlay from "../ui/ErrorOverlay";
 function ManageAnnouncement({ navigation, route }) {
 
     const annCtx = useContext(AnnouncementContext);
+    
+    const [errorMessage,setErrorMessage]=useState('default')
     const [isError,setError]=useState(false)
     const [isLoading,setLoading]=useState(false)
 
@@ -28,17 +30,18 @@ function ManageAnnouncement({ navigation, route }) {
             annCtx.addAnnouncement({ ...annData, id: annId });
             navigation.navigate("Announcements");
         }
-    }catch(e){
+    }catch(err){
         setLoading(false)
+        setErrorMessage(JSON.stringify(err));
         setError(true)
     }
     }
 
     if(isLoading){
-        return <LoadingOverlay />
+        return <LoadingOverlay/>
     }
     if(isError){
-       return <ErrorOverlay /> 
+       return <ErrorOverlay message={errorMessage}/> 
     }
 
     function onCancelHandler() {

@@ -57,10 +57,15 @@ function AdminHeader({screen,size}) {
         }
     }
 
+    function SankratisOnpressHandler(){
+        Navigation.navigate('ManageSankranti');
+    }
+
    if(screen ==='about'){
         ele=<View></View>  
     }else if(screen==='events'){
          ele=<View style={styles.container}>
+        <Button title='Sankratis' onPress={SankratisOnpressHandler}/>
         <CustomButton 
         style2={styles.label} 
         style3={styles.button} 

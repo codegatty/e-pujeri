@@ -33,6 +33,7 @@ import EventSummery from './components/Events/EventSummery';
 import ManageAnnouncement from './components/Announcement/ManageAnnouncement';
 import AnnouncementSummery from './components/Announcement/AnnouncementSummery';
 import NotificationSummery from './components/Notification/NotificationSummery';
+import ManageSankranti from './components/Sankranti/ManageSankranti';
 //other
 import { globalColors } from './constants/appColors';
 import { AdminAuthContext } from './store/adminAuth-context';
@@ -44,6 +45,9 @@ import { addTokenToDatabasae } from './util/http/pushTokenHttp';
 
 export default function App() {
 
+  //Firebase installation
+  //Firebase installation
+
   //Navigation variables
   const Drawer = createDrawerNavigator();
   const BottomTab = createBottomTabNavigator();
@@ -53,7 +57,10 @@ export default function App() {
   useEffect(()=>{ 
     notification.getExpoPushTokenAsync().then((token)=>{
       addTokenToDatabasae(token.data);
-    }).catch(()=>{Alert.alert("getExpoPushAsync() problem",'contact developer of this appp')})
+    }).catch((err)=>{
+        let message=JSON.stringify(err)
+      Alert.alert("getExpoPushAsync() problem",message)
+    })
   },[])
 
   //obtaing push token
@@ -128,6 +135,8 @@ export default function App() {
         {/*Announcement Components*/}
         {authCtx.isAuth && <Stack.Screen name='ManageAnnouncement' component={ManageAnnouncement} />}
         {authCtx.isAuth && <Stack.Screen name="AnnouncementSummery" component={AnnouncementSummery} />}
+        {/*Sankrati Components*/}
+        {authCtx.isAuth && <Stack.Screen name="ManageSankranti" component={ManageSankranti} />}
       </Stack.Navigator>
     );
   }

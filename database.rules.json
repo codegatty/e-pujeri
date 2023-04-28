@@ -1,0 +1,6 @@
+{
+  "rules": {
+    ".read":true, 
+    ".write":true,  // 2022-10-16
+  }
+}

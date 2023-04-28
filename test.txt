@@ -17,4 +17,14 @@ adminHeader.js
     </View>*/}
 
     //Testing the github 
+
+
+
+
+              "sounds": [
+            "./local/assets/notification-sound.wav",
+            "./local/assets/notification-sound-other.mp3"
+          ]
+
+                    "icon": "./local/assets/notification-icon.png",
     

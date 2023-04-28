@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "470931431354",
+    "firebase_url": "https://epujeri-d5ced-default-rtdb.firebaseio.com",
+    "project_id": "epujeri-d5ced",
+    "storage_bucket": "epujeri-d5ced.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470931431354:android:6ba3df75b177af5858c783",
+        "android_client_info": {
+          "package_name": "com.rajithgatty.Epujeritest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470931431354-b7q86tai1iosrafl6ce0rtjbosmt23kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw7Eup_NrHWhdUM_Sl1XIBQVxncaypz48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470931431354-b7q86tai1iosrafl6ce0rtjbosmt23kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

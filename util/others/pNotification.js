@@ -10,8 +10,7 @@ Notification.setNotificationHandler({
     }
 })    
 export  async function PushNotificationHandler(name,description){
-    const tokens=fetchTokensFromDatabase();
-    console.log(tokens);
+    const tokens=await fetchTokensFromDatabase();
     await configurePushNotifcation();
     fetch('https://exp.host/--/api/v2/push/send',
     {
@@ -20,7 +19,7 @@ export  async function PushNotificationHandler(name,description){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            to: 'ExponentPushToken[D-dqkwHmiI0sRYm-zO2K2c]',
+            to:tokens,
             title: name,
             body:description
         })

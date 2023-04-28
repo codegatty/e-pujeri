@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "E-pujeri",
+    "slug": "E-pujeri",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,30 +18,34 @@
       "**/*"
     ],
     "ios": {
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 1,
+      "useNextNotificationsApi": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.rajithgatty.Epujeritest",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "plugins": [
       [
         "expo-notifications",
         {
-          "icon": "./local/assets/notification-icon.png",
-          "color": "#ffffff",
-          "sounds": [
-            "./local/assets/notification-sound.wav",
-            "./local/assets/notification-sound-other.wav"
-          ]
+          "color": "#ffffff"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9f2035b6-6f57-47eb-8f47-bdd90eb6f5c0"
+      }
+    }
   }
 }

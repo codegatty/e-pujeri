@@ -19,16 +19,11 @@ export async function addTokenToDatabasae(token){
 }
 
 export async function fetchTokensFromDatabase(){
-    const response=await axios.get(URL+'/token.json')
+    const response=await axios.get(URL+'/tokens.json')
     let tokens=[]
-    
     for(const key in response.data){
-        const token={
-            tok:response.data[key].token
-        }
-        console.log(token)
-        tokens.push(token)
+        tokens.push(response.data[key].token)
     }
-    console.log(tokens)
+    
     return tokens;
 }
