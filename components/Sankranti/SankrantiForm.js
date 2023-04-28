@@ -1,40 +1,39 @@
 import { useState } from "react";
-import { Text, View, ScrollView, TextInput, StyleSheet, Button } from "react-native";
+import { Text, View, ScrollView, TextInput, StyleSheet, Button,ToastAndroid } from "react-native";
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import InputBox from "../ui/InputBox";
 import { dateToString } from "../../util/others/dateToString";
 import { globalColors } from "../../constants/appColors";
-function SankrantiForm({onSubmit}) {
+function SankrantiForm({onSubmit,sanData}) {
     const [showDatePicker, setShowDatePicker] = useState(false)
-
     const [inputDateValues, setInputDateValues] = useState({
-        jan: '',
-        feb: '',
-        mar: '',
-        apr: '',
-        may: '',
-        jun: '',
-        jul: '',
-        aug: '',
-        sep: '',
-        oct: '',
-        nov: '',
-        dec: ''
+        jan:sanData.jan[0],
+        feb:sanData.feb[0],
+        mar:sanData.mar[0],
+        apr:sanData.apr[0],
+        may:sanData.may[0],
+        jun:sanData.jun[0],
+        jul:sanData.jul[0],
+        aug:sanData.aug[0],
+        sep:sanData.sep[0],
+        oct:sanData.oct[0],
+        nov:sanData.nov[0],
+        dec:sanData.dec[0]
     })
 
     const [inputDescValues, setInputDescValues] = useState({
-        jan: '',
-        feb: '',
-        mar: '',
-        apr: '',
-        may: '',
-        jun: '',
-        jul: '',
-        aug: '',
-        sep: '',
-        oct: '',
-        nov: '',
-        dec: ''
+        jan:sanData.jan[1],
+        feb: sanData.feb[1],
+        mar: sanData.mar[1],
+        apr: sanData.apr[1],
+        may: sanData.may[1],
+        jun: sanData.jun[1],
+        jul: sanData.jul[1],
+        aug: sanData.aug[1],
+        sep: sanData.sep[1],
+        oct: sanData.oct[1],
+        nov: sanData.nov[1],
+        dec: sanData.dec[1]
     })
 
     function dateHandler() {
@@ -107,6 +106,7 @@ function SankrantiForm({onSubmit}) {
             nov:[inputDateValues.nov,inputDescValues.nov],
             dec:[inputDateValues.dec,inputDescValues.dec],
         }
+        ToastAndroid.showWithGravity("Date successfully updated!",ToastAndroid.LONG,ToastAndroid.TOP)
         onSubmit(data);
     }
 
@@ -122,7 +122,9 @@ function SankrantiForm({onSubmit}) {
                             value: dateToString(inputDateValues.jan)
                         }
                     } />
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'jan') }} />
+                    <InputBox label="Description" textConfig={{ 
+                        onChangeText: inputDescChangeHandler.bind(this, 'jan'),
+                        value:inputDescValues.jan }} />
                     <View>
                         <Button title="Update" onPress={updateHandler} />
                     </View>
@@ -134,8 +136,10 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.feb)
                     }} />
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'feb') }} />
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ 
+                        onChangeText: inputDescChangeHandler.bind(this, 'feb'),
+                        value:inputDescValues.feb}} />
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="March" textConfig={{
@@ -144,8 +148,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.mar)
                     }} />
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'mar') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'mar'),
+                value:inputDescValues.mar }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="April" textConfig={{
@@ -154,8 +159,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.apr)
                     }} />
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'apr') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'apr'),
+                value:inputDescValues.apr }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="May" textConfig={{
@@ -164,8 +170,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.may)
                     }} />
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'may') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'may'),
+                value:inputDescValues.may }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="June"  textConfig={{
@@ -174,8 +181,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.jun)
                     }}/>
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'jun') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'jun'),
+                value:inputDescValues.jun }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="July" textConfig={{
@@ -184,8 +192,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.jul)
                     }}/>
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'jul') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'jul'),
+                value:inputDescValues.jul }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="August" textConfig={{
@@ -194,8 +203,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.aug)
                     }}/>
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'aug') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'aug'),
+                value:inputDescValues.aug }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View >
                 <View style={styles.container}>
                     <InputBox label="September" textConfig={{
@@ -204,8 +214,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.sep)
                     }}/>
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'sep') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'sep'),
+                value:inputDescValues.sep }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="October" textConfig={{
@@ -214,8 +225,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.oct)
                     }}/>
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'oct') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'oct'),
+                value:inputDescValues.oct }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="November" textConfig={{
@@ -224,8 +236,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.nov)
                     }}/>
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'nov') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'nov'),
+                value:inputDescValues.nov }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
                 <View style={styles.container}>
                     <InputBox label="December" textConfig={{
@@ -234,8 +247,9 @@ function SankrantiForm({onSubmit}) {
                         onchange: dateHandler,
                         value: dateToString(inputDateValues.dec)
                     }}/>
-                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'dec') }}/>
-                    <Button title="Update" />
+                    <InputBox label="Description" textConfig={{ onChangeText: inputDescChangeHandler.bind(this, 'dec'),
+                value:inputDescValues.dec }}/>
+                    <Button title="Update" onPress={updateHandler}/>
                 </View>
             </View>
             {

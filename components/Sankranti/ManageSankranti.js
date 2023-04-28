@@ -1,14 +1,38 @@
-import { Text } from "react-native";
+import { useEffect,useState } from "react";
+
+import { Text,View } from "react-native";
 
 import SankrantiForm from "./SankrantiForm";
-
+import { fetchSankranti, updateSankranti } from "../../util/http/sankrantiHttp";
 
 function ManageSankranti(){
-function sankrantiDataHandler(data){
-    
+    const [data,setData]=useState(undefined)
+useEffect(()=>{
+    async function fetchSankrantiHandler(){
+        setData( await fetchSankranti());
+    }
+    fetchSankrantiHandler();
+},[])
+
+    async function sankrantiDataHandler(upData){
+        await updateSankranti(upData);
+        
+}
+//Temperary solution please upgrade to context if you can .it is the efficient method
+let ele
+if(!data){
+    ele='';
+}else{
+    ele=<SankrantiForm onSubmit={sankrantiDataHandler} sanData={data}/>
 }
 return(
-    <SankrantiForm onSubmit={sankrantiDataHandler}/>
+
+    <View>
+    {
+        ele
+    }
+    </View>
+    
 );
 
 }

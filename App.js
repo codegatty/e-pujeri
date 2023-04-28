@@ -26,6 +26,7 @@ import About from './screens/tabScr/About';
 import Events from './screens/tabScr/Events';
 import Announcements from './screens/tabScr/Announcements';
 import Notifications from './screens/tabScr/User/Notifications';
+import Sankranti from './screens/tabScr/User/Sankranti';
 //Stack
 import Authentication from './screens/stack/Authentication';
 import ManageEvent from './components/Events/ManageEvent';
@@ -198,6 +199,12 @@ export default function App() {
           tabBarIcon: ({ color, size }) => <Ionicons name='notifications' color={color} size={size} />,
           headerRight:()=><UserHeader screen="notifications"/>
         }} />
+
+        <BottomTab.Screen name="Sankranti" component={Sankranti} options={{
+          title:'Sankranti',
+          tabBarIcon: ({ color, size }) => <Ionicons name="people" color={color} size={size} />,
+
+        }}/>
 
         <BottomTab.Screen name='About' component={About} options={{
           tabBarIcon: ({ color, size }) => <Ionicons name="information" color={color} size={size} />,
