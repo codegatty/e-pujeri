@@ -1,6 +1,8 @@
 import { FlatList,Text,View,StyleSheet } from "react-native";
 import { globalColors } from "../../constants/appColors";
 import { dateToString } from "../../util/others/dateToString";
+import { findDiffBetweenDates } from "../../util/others/findDiffBetweenDates";
+import Tag from "../ui/Tag";
 
 function SankrantiList({dataSet}){
     let dataSetInArray=[]
@@ -11,13 +13,26 @@ function SankrantiList({dataSet}){
         }
         dataSetInArray.push(obj)
     }
+
     const month=["January","February","March","April","May","June","July","August","September","October","November","December"];
+    
+
     function renderHandler(dataItem){
-        let sDate=new Date(dataItem.item.date)
+        const sDate=new Date(dataItem.item.date)
+        const currentDate=new Date;
+        let ele=''
+        const diff=findDiffBetweenDates(sDate,currentDate)
+        
+        if(sDate.getMonth()===currentDate.getMonth() && diff<32 && diff>0){
+            ele=<Text style={styles.info1}>Next Sankranti</Text>
+        }else {
+            ele='';
+        }
         return <View style={styles.container}>
             <Text style={styles.title}>{month[sDate.getMonth()]}</Text>
+            {ele}
             <View style={styles.detailContainer}>
-            <Text style={styles.detail}>Name: <Text style={styles.value}>{dataItem.item.name}</Text></Text>
+            <Text style={styles.detail}><Text style={styles.value}>{dataItem.item.name}</Text></Text>
             <Text style={styles.detail}>Date:<Text style={styles.value}>{dateToString(dataItem.item.date)}</Text></Text>
             </View>
         </View>
@@ -62,5 +77,14 @@ const styles=StyleSheet.create({
         fontWeight:'600',
         letterSpacing:1,
         textAlign:"center"
-    }
+    },
+    info1:{
+            textAlign:'center',
+            fontSize:18,
+            borderWidth:1,
+            borderColor:'green',
+            borderRadius:4,
+            color:'red',
+            marginHorizontal:60
+        }
 })

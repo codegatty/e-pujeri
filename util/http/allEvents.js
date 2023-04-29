@@ -37,9 +37,9 @@ export async function fetchAllEvents(){
             isYearlyEvent:eventResponse.data[key].isYearlyEvent,
             type:eventResponse.data[key].type,
             publishedDate:eventResponse.data[key].publishedDate,
-            notficationType:'event',
+            notificationType:'event',
             isNotified:eventResponse.data[key].isNotified,
-            remaingDays:findDiffBetweenDates(currentDate,eventResponse.data[key].date)
+            remaingDays:findDiffBetweenDates(eventResponse.data[key].date,currentDate)
 
             
         }

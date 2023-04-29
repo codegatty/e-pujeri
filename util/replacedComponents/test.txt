@@ -1,0 +1,11 @@
+    <View style={styles.detailContainer}>
+        <Text style={styles.detail}> <Text style={styles.info1}>{data.name}</Text></Text>
+        <Text style={styles.detail}>PublishedDate: {dateToString(data.publishedDate)}</Text>
+    </View>
+    <View style={styles.mainTagContainer}>
+        <View style={styles.tagContainer}>
+        {tagHandler()}
+        <Tag style1={[data.notficationType==='event'?eventTagHandler():{backgroundColor:'blue'},styles.tag]}>
+            {data.notficationType==='event'?data.type:'Announcemnet'}</Tag>
+        </View>
+    </View
