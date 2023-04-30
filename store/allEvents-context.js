@@ -1,18 +1,23 @@
 import { createContext,useState} from "react";
 
 export const AllEventsContext=createContext({
-    events:{},
-    setEvents:()=>{}
+    events:[],
+    setEvents:()=>{},
 })
+//event holds all data without applying any filtering,at the same time filtered event contains filtered data
 
 function NotificationContextProvider({children}){
-    const [events,setEvents]=useState({});
+    const [events,setEvents]=useState([]);
+    const [filteredEvents,setFilteredEvent]=useState({})
+
     function storeEvents(events){
         setEvents(events)
     }
+
     const values={
         events:events,
-        setEvents:storeEvents
+        setEvents:storeEvents,
+
     }
 
     return(

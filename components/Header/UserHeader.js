@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
 import {View,StyleSheet} from 'react-native';
-import CustomButton from '../ui/CustomButton';
-import { globalColors } from '../../constants/appColors';
 import { NotificationViewContext } from '../../store/notificationView-context';
+import { filterContext } from '../../store/userFilter-context';
 import HeaderButton from '../ui/HeaderButtin';
 import FilterModel from '../ui/FilterModel';
 
 function UserHeader({screen}){
     const notificationViewCtx=useContext(NotificationViewContext)
+    const filterCtx=useContext(filterContext);
     const[isModel,setModel]=useState(false)
     const isshow=isModel
 
@@ -41,9 +41,15 @@ function UserHeader({screen}){
         ele=<View style={styles.buttonContainer}><HeaderButton onpress={onPressHandler}>
             {notificationViewCtx.mode}
         </HeaderButton><HeaderButton onpress={modelVisibility}>Filter</HeaderButton>
-        {isModel&&<FilterModel/>}
+        {isModel&&<FilterModel onOptionSelect={selectedOption}/>}
         
         </View>
+    }
+    //Filter value comes form hear
+    function selectedOption(option){
+        filterCtx.setOption(option)
+        setModel(false)
+        
     }
     return(
         <View style={styles.container}>

@@ -9,8 +9,8 @@ export async function fetchAllEvents(){
     let notification=[];
 
     let moment=require('moment');
-    let currentDate=moment([]);//current date
-    
+    //let currentDate=moment([]);//current date
+    const currentDate=new Date()
     const announcementResponse=await axios.get(url+'/announcement.json');
     const eventResponse=await axios.get(url+'/events.json');
 
@@ -32,11 +32,12 @@ export async function fetchAllEvents(){
             name:announcementResponse.data[key].name,
             description:announcementResponse.data[key].description,
             publishedDate:announcementResponse.data[key].publishedDate,
+            daysAfterAnnounced:findDiffBetweenDates(announcementResponse.data[key].publishedDate,currentDate),
             notificationType:'announcement'
         }
         let pubDate=moment(announcement.publishedDate);
-        let diffBetweenDates=findDiffBetweenDates(currentDate,pubDate);
-        if(diffBetweenDates<62){
+        let diffBetweenDates=findDiffBetweenDates(pubDate,currentDate);
+        if(diffBetweenDates>-5){
             notification.push(announcement);
         }
     }

@@ -8,6 +8,7 @@ import { findDiffBetweenDates } from "../../util/others/findDiffBetweenDates";
 
 function NotificationItem({ data }) {
     const Navigation = useNavigation();
+    let todaysEvent={};
     function onPressHandler() {
 
         const notificationData = {
@@ -40,10 +41,12 @@ function NotificationItem({ data }) {
 
         if (data.notficationType === 'event') {
             const diff = findDiffBetweenDates(data.date, new Date())
-            if (diff <= 2&&diff>=0)
+            if (diff <= 2&&diff>=0){
+                todaysEvent={}
                 return <Tag>Important</Tag>
-            else
+            }else{
                 return ''
+            }
         } else {
             const diff = findDiffBetweenDates(data.publishedDate, new Date())
             if (diff == 0)
@@ -102,8 +105,10 @@ const styles = StyleSheet.create({
     pressable: {
         borderBottomWidth: 1,
         borderBottomColor: globalColors.colors.primary100,
+        
     },
     container: {
+        backgroundColor:'transparent',
         marginVertical: 6
     },
     detailContainer: {

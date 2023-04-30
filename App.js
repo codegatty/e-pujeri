@@ -18,6 +18,8 @@ import NotificationContextProvider from './store/allEvents-context';
 import ShowAllEventProvider from './store/showAllEvent-context';
 import ShowAllNoificationProvider from './store/showAllNotification-Context';
 import NotificationViewProvider from './store/notificationView-context';
+import UserFilterContextProvider from './store/userFilter-context';
+
 //Drawer
 import AdminScreen from './screens/drawerScr/AdminScreen';
 import UserScreen from './screens/drawerScr/UserScreen';
@@ -229,9 +231,11 @@ export default function App() {
               <ShowAllEventProvider>
               <ShowAllNoificationProvider>
               <NotificationViewProvider>
+                <UserFilterContextProvider>
               <NavigationContainer>
                 <DrawerNavigation />
               </NavigationContainer>
+              </UserFilterContextProvider>
               </NotificationViewProvider>
               </ShowAllNoificationProvider>
               </ShowAllEventProvider>
