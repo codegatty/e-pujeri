@@ -43,7 +43,8 @@ async function configurePushNotifcation() {
     if (Platform.OS == 'android') {
         Notification.setNotificationChannelAsync('default', {
             name: 'default',
-            importance: Notification.AndroidImportance.DEFAULT
+            importance: Notification.AndroidImportance.HIGH,
+            vibrationPattern: [0, 250, 250, 250]
         });
     }
 }

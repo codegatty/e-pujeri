@@ -9,3 +9,5 @@
             {data.notficationType==='event'?data.type:'Announcemnet'}</Tag>
         </View>
     </View
+
+    eventResponse.data[key].date

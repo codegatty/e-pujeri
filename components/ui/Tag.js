@@ -19,7 +19,8 @@ main:{
     backgroundColor:'red',
     borderRadius:6,
     borderWidth:1,
-    
+    height:20,
+    maxHeight:20,
 },
 text:{
     paddingHorizontal:5,

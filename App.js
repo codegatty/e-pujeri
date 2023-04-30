@@ -84,8 +84,11 @@ export default function App() {
       if(Platform.OS==='android'){
         notification.getNotificationChannelAsync('default',{
           name:'default',
-          importance:notification.AndroidImportance.DEFAULT
-        })
+          importance:notification.AndroidImportance.HIGH,
+          vibrationPattern: [0, 250, 250, 250]
+        }
+        )
+      
       }
     }
     configurePushNotifcation();

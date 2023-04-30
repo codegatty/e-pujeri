@@ -9,7 +9,7 @@ function NotificationList({data}){
     const mode=notificationViewCtx.mode;
 
    if(mode==='events'){
-        data=data.filter((item)=>item.notficationType==='event')
+        data=data.filter((item)=>item.notificationType==='event')
     }else if(mode==='announcements'){
         data=data.filter((item)=>item.notificationType==='announcement')
     }

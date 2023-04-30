@@ -1,5 +1,6 @@
 import { useEffect,useContext,useState} from 'react';
 
+
 import { AllEventsContext } from '../../../store/allEvents-context';//this is the notification context
 
 import { fetchAllEvents } from '../../../util/http/allEvents';
@@ -8,12 +9,13 @@ import {updateNotificationSentTrue} from '../../../util/http/notificationSent';
 import ErrorOverlay from '../../../components/ui/ErrorOverlay';
 import LoadingOverlay from '../../../components/ui/LoadingOverlay';
 
+
+
 function Notification(){
     const [error,setError]=useState(false)
     const [loading,setLoading]=useState(false)
 
     const notificationCtx=useContext(AllEventsContext);
-    
     useEffect(()=>{
         
         async function fetchNotification(){
@@ -21,10 +23,10 @@ function Notification(){
             try{
             const allNotification=await fetchAllEvents();
             notificationCtx.setEvents(allNotification);
-            console.log(notificationCtx.events)
+            
             //await updateNotificationSentTrue();
             }catch(e){
-                
+                 console.log(e)
                 setError(true)
             }
             setLoading(false)
@@ -33,7 +35,7 @@ function Notification(){
     },[])
 
     if(error){
-        return <ErrorOverlay message="Could not fetch data from database !"/>
+        return <ErrorOverlay message="Could not fetch data from database"/>
     }
 
     if(loading){

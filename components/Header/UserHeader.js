@@ -1,12 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import {View,StyleSheet} from 'react-native';
 import CustomButton from '../ui/CustomButton';
 import { globalColors } from '../../constants/appColors';
 import { NotificationViewContext } from '../../store/notificationView-context';
+import HeaderButton from '../ui/HeaderButtin';
+import FilterModel from '../ui/FilterModel';
 
 function UserHeader({screen}){
     const notificationViewCtx=useContext(NotificationViewContext)
+    const[isModel,setModel]=useState(false)
+    const isshow=isModel
 
+    function modelVisibility(){
+        setModel(true)
+    }
     let ele=''
     
     function onPressHandler(){
@@ -23,18 +30,25 @@ function UserHeader({screen}){
     if(screen==='about'){
         ele=<View></View>;
     }else if(screen==='notifications'){
-        ele=<View>
+        /*ele=<View>
         <CustomButton 
         style2={styles.label} 
         style3={styles.button} 
         style1={styles.buttonContainer}
         onPress={onPressHandler}
         >{notificationViewCtx.mode}</CustomButton>
-        </View>;
+        </View>;*/
+        ele=<View style={styles.buttonContainer}><HeaderButton onpress={onPressHandler}>
+            {notificationViewCtx.mode}
+        </HeaderButton><HeaderButton onpress={modelVisibility}>Filter</HeaderButton>
+        {isModel&&<FilterModel/>}
+        
+        </View>
     }
     return(
-        <View>
+        <View style={styles.container}>
             {ele}
+            
         </View>
         
     );
@@ -42,24 +56,12 @@ function UserHeader({screen}){
 }
 
 const styles=StyleSheet.create({
-    label:{
-        fontSize:13,
-        fontWeight:'bold',
-        letterSpacing:2,
-        color:globalColors.colors.primary100,
-        position:'absolute',
-        textAlign:'center'
-    },
-    button:{
-        backgroundColor:globalColors.colors.primaryBackground,
-        paddingHorizontal:14,
-
+    container:{
+        marginRight:40
     },
     buttonContainer:{
-        alignContent:'center',
-        justifyContent:'center',
+        flexDirection:'row'
     }
-
 })
 
 

@@ -13,6 +13,18 @@ export async function fetchAllEvents(){
     
     const announcementResponse=await axios.get(url+'/announcement.json');
     const eventResponse=await axios.get(url+'/events.json');
+
+    function remainingDaysFinder(data) {
+
+        if (data.type === 'ame' || data.type === 'soothaka') {
+            const dateInFormat = new Date(data.date)
+            const resultDate = moment(dateInFormat, "DD-MM-YYYY").add(16, 'days');
+            return [findDiffBetweenDates(resultDate,currentDate),resultDate]
+        }else{
+            return [findDiffBetweenDates(data.date,currentDate),data.date]
+        }
+    }
+
     
     for(let key in announcementResponse.data){
         const announcement={
@@ -33,17 +45,16 @@ export async function fetchAllEvents(){
             id:key,
             name:eventResponse.data[key].event,
             description:eventResponse.data[key].about,
-            date:eventResponse.data[key].date,
+            date:new Date(remainingDaysFinder(eventResponse.data[key])[1]),
             isYearlyEvent:eventResponse.data[key].isYearlyEvent,
             type:eventResponse.data[key].type,
             publishedDate:eventResponse.data[key].publishedDate,
             notificationType:'event',
             isNotified:eventResponse.data[key].isNotified,
-            remaingDays:findDiffBetweenDates(eventResponse.data[key].date,currentDate)
+            remaingDays:remainingDaysFinder(eventResponse.data[key])[0]
 
             
         }
-
         let pubDate=event.date;
         let diffBetweenDates=findDiffBetweenDates(pubDate,currentDate);
         if(diffBetweenDates>=0){

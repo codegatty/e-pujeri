@@ -13,7 +13,7 @@ function NotificationDetails({notiData}){
                 <Title style1={styles.title}>{notiData.name}</Title>
                 <View style={styles.detailsContainer}>
                     <Detail title="Description" value={notiData.description}/>
-                    {notiData.eventDate&&<Detail title="Event Date" value={dateToString(notiData.eventDate)}/>}
+                    {notiData.eventDate&&<Detail title="Event Date" value={notiData.eventDate}/>}
                     {notiData.eventType&&<Detail title="Event Type" value={notiData.eventType}/>}
                     {notiData.eventIsYearly!==' '&&<Detail title="Is Yearly Event" value={notiData.eventIsYearly?.toString()}/>}
                     <Detail title="publidhed Date" value={dateToString(notiData.publishedDate)}/>

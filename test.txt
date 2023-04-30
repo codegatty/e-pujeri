@@ -27,4 +27,9 @@ adminHeader.js
           ]
 
                     "icon": "./local/assets/notification-icon.png",
-    
+
+
+
+
+    "@react-native-firebase/auth": "17.4.3",
+    "@react-native-firebase/database": "17.4.3",
