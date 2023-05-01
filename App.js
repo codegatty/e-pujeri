@@ -108,6 +108,7 @@ export default function App() {
 
       }}>
         <Drawer.Screen name='User' component={UserPanel} options={{
+          headerTitle:'E-Pujeri',
           drawerIcon: ({ size }) => <Ionicons name="people-outline" size={size} color={globalColors.colors.primary100} />
         }} />
         <Drawer.Screen name='Admin' component={AdminPanel} options={({ navigation }) => ({

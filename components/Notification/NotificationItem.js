@@ -64,9 +64,9 @@ function NotificationItem({ data }) {
     let eventStatus;
     if (data.remaingDays === 0) {
         eventStatus = "Today!"
-    } else if (data.remaingDays > 0 && data.type !== 'ame' || data.type !== 'soothaka') {
+    } else if (data.remaingDays > 0 && (data.type !== 'ame' || data.type !== 'soothaka')) {
         eventStatus = `${data.remaingDays} days remaining`
-    } else if (data.remaingDays <= -1) {
+    } else if (data.remaingDays <0) {
         eventStatus = "Event completed!"
     }
     return (

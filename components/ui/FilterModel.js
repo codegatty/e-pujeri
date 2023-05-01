@@ -18,22 +18,30 @@ function FilterModel({onOptionSelect}) {
                 <Pressable
                         style={[styles.pressable,filterCtx.option===0&&{backgroundColor:globalColors.colors.primary100}]}
                         android_ripple={{ color: 'white' }}
-                        onPress={onPressHandler.bind(this, 0)}><Text style={styles.text}>No filter</Text></Pressable>
+                        onPress={onPressHandler.bind(this, 0)}>
+                            <Text 
+                            style={[styles.text,filterCtx.option===0&&{color:'white'}]}>
+                                No filter</Text></Pressable>
                     <Pressable
                         style={[styles.pressable,filterCtx.option===1&&{backgroundColor:globalColors.colors.primary100}]}
                         android_ripple={{ color: 'white' }}
-                        onPress={onPressHandler.bind(this, 1)}><Text style={styles.text}>Today</Text></Pressable>
+                        onPress={onPressHandler.bind(this, 1)}>
+                            <Text style={[styles.text,,filterCtx.option===1&&{color:'white'}]}>
+                                Today</Text></Pressable>
                     <Pressable
                         style={[styles.pressable,,filterCtx.option===2&&{backgroundColor:globalColors.colors.primary100}]}
                         android_ripple={{ color: 'white' }}
-                        onPress={onPressHandler.bind(this, 2)}><Text style={styles.text}>Tomorrow</Text></Pressable>
+                        onPress={onPressHandler.bind(this, 2)}>
+                            <Text style={[styles.text,,filterCtx.option===2&&{color:'white'}]}>Tomorrow</Text></Pressable>
                     <Pressable
                         style={[styles.pressable,,filterCtx.option===3&&{backgroundColor:globalColors.colors.primary100}]}
                         android_ripple={{ color: 'white' }}
-                        onPress={onPressHandler.bind(this, 3)}><Text style={styles.text}>Yesterday</Text></Pressable>
+                        onPress={onPressHandler.bind(this, 3)}>
+                            <Text style={[styles.text,,filterCtx.option===3&&{color:'white'}]}>Yesterday</Text></Pressable>
                     <Pressable style={[styles.pressable,,filterCtx.option===4&&{backgroundColor:globalColors.colors.primary100}]}
                         android_ripple={{ color: 'white' }}
-                        onPress={onPressHandler.bind(this, 4)}><Text style={styles.text}>completed Events</Text></Pressable>
+                        onPress={onPressHandler.bind(this, 4)}>
+                            <Text style={[styles.text,,filterCtx.option===4&&{color:'white'}]}>completed Events</Text></Pressable>
                 </View>
             </View>
         </Modal>
@@ -59,12 +67,12 @@ const styles = StyleSheet.create({
     },
     pressable: {
         height: 50,
-        borderWidth: 1,
+        borderBottomWidth:1,
         justifyContent: 'center',
         width: '100%',
         alignContent: 'center',
-        borderColor: globalColors.colors.primary100,
-        backgroundColor: globalColors.colors.primary200,
+        borderColor: globalColors.colors.primary300,
+        backgroundColor: globalColors.colors.primaryBackground,
 
     },
     text: {
@@ -72,6 +80,6 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         letterSpacing: 1,
         fontSize: 16,
-        color: 'white'
+        color: 'black'
     }
 })

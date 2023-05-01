@@ -40,7 +40,7 @@ function UserHeader({screen}){
         </View>;*/
         ele=<View style={styles.buttonContainer}><HeaderButton onpress={onPressHandler}>
             {notificationViewCtx.mode}
-        </HeaderButton><HeaderButton onpress={modelVisibility}>Filter</HeaderButton>
+        </HeaderButton><HeaderButton onpress={modelVisibility} name="caret-down-sharp" isList={true}>Filter</HeaderButton>
         {isModel&&<FilterModel onOptionSelect={selectedOption}/>}
         
         </View>

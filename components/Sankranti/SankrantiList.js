@@ -82,9 +82,11 @@ const styles=StyleSheet.create({
             textAlign:'center',
             fontSize:18,
             borderWidth:1,
-            borderColor:'green',
+            borderColor:globalColors.colors.primary300,
             borderRadius:4,
-            color:'red',
-            marginHorizontal:60
+            color:'white',
+            marginHorizontal:60,
+            backgroundColor:globalColors.colors.primary300,
+            letterSpacing:1
         }
 })

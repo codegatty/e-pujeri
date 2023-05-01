@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { FlatList, Text } from 'react-native';
+import { useContext } from 'react';
+import { FlatList, Text,StyleSheet,View, ViewBase } from 'react-native';
 
 import NotificationItem from './NotificationItem';
 import { NotificationViewContext } from '../../store/notificationView-context';
@@ -57,12 +57,28 @@ function NotificationList({ data }) {
     function renderHandler(item) {
         return <NotificationItem data={item.item} />
     }
+    
     return (<>
-        <FlatList data={data} renderItem={renderHandler} keyExtractor={(item) => item.id} />
-
+        {data.length>0?
+        <FlatList data={data} renderItem={renderHandler} keyExtractor={(item) => item.id}/>: 
+        <View style={styles.messageContainer}><Text style={styles.message}>No Data Found...!</Text></View>}
     </>
     );
 
 }
 
 export default NotificationList;
+
+const styles=StyleSheet.create({
+    messageContainer:{
+        flex:1,
+    },
+    message:{
+        marginTop:300,
+        textAlign:'center',
+        letterSpacing:2,
+        color:'grey',
+        fontWeight:'500',
+        fontSize:15
+    }
+})
