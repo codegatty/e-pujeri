@@ -52,13 +52,13 @@ export async function fetchAllEvents(){
             publishedDate:eventResponse.data[key].publishedDate,
             notificationType:'event',
             isNotified:eventResponse.data[key].isNotified,
-            remaingDays:remainingDaysFinder(eventResponse.data[key])[0]
+            remaingDays:(remainingDaysFinder(eventResponse.data[key])[0]+1)
 
             
         }
         let pubDate=event.date;
         let diffBetweenDates=findDiffBetweenDates(pubDate,currentDate);
-        if(diffBetweenDates>=0){
+        if(diffBetweenDates>=-2){
             notification.push(event);
         }
     }

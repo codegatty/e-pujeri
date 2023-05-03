@@ -10,9 +10,9 @@ function EventType({label,onChangeType,defaultType}){
         {Name:'Soothaka', Value:'soothaka'},
         {Name:'Varshika',Value:'varshika'}
     ];
-    //if(defaultType){
-    //selectedIndex=typeOfEvents.findIndex((type)=>type.Value===defaultType);
-    //}
+    if(defaultType){
+    selectedIndex=typeOfEvents.findIndex((type)=>type.Value===defaultType);
+    }
     function SelectedEventHandler(selectedType){
         onChangeType(selectedType);
     }
@@ -23,11 +23,14 @@ function EventType({label,onChangeType,defaultType}){
 
     return(
         <View style={styles.container}>
+            <Text style={styles.label}>Event Type</Text>
+            <View style={styles.picker}>
             <PickerModal 
                 selected={typeOfEvents[selectedIndex]}            
             items={typeOfEvents} 
             onSelected={SelectedEventHandler}
             onClosed={closeHandler}/>
+            </View>
             </View>
     )
     

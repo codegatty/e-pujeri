@@ -4,9 +4,9 @@ import { FlatList, Text,StyleSheet,View, ViewBase } from 'react-native';
 import NotificationItem from './NotificationItem';
 import { NotificationViewContext } from '../../store/notificationView-context';
 import { filterContext } from '../../store/userFilter-context';
-import { filterEvent } from '../../util/others/filterEvent';
+
 import { AllEventsContext } from '../../store/allEvents-context';
-import { findDiffBetweenDates } from '../../util/others/findDiffBetweenDates';
+
 function NotificationList({ data }) {
     const EventsCtx = useContext(AllEventsContext);
     const notificationViewCtx = useContext(NotificationViewContext);
@@ -19,6 +19,8 @@ function NotificationList({ data }) {
     } else if (mode === 'announcements') {
         data = filterHandler(data)
         data = data.filter((item) => item.notificationType === 'announcement')
+    }else if(mode==='all'){
+        data=filterHandler(data)
     }
 
     function filterHandler(data) {
@@ -48,6 +50,19 @@ function NotificationList({ data }) {
                 case 3: data = data.filter((ele) => ele.daysAfterAnnounced === -1)
                     break;
                 case 4: data = data.filter((ele) => ele.daysAfterAnnounced <0)
+                    break;
+            }
+        }else if(mode==='all'){
+            switch (op) {
+                case 0: data = EventsCtx.events
+                    break;
+                case 1: data = data.filter((ele) => ele.notificationType === 'event'?ele.remaingDays === 0:ele.daysAfterAnnounced === 0)
+                    break;
+                case 2: data = data.filter((ele) => ele.notificationType === 'event'?ele.remaingDays === 1:ele.daysAfterAnnounced === 1)
+                    break;
+                case 3: data = data.filter((ele) => ele.notificationType === 'event'?ele.remaingDays === -1:ele.daysAfterAnnounced === -1)
+                    break;
+                case 4: data = data.filter((ele) => ele.notificationType === 'event'?ele.remaingDays <0:ele.daysAfterAnnounced <0)
                     break;
             }
         }
