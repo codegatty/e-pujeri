@@ -41,7 +41,7 @@ function NotificationItem({ data }) {
 
         if (data.notficationType === 'event') {
             const diff = findDiffBetweenDates(data.date, new Date())
-            if (diff <= 2&&diff>=0){
+            if (diff <= 1&&diff>=-1){
                 todaysEvent={}
                 return <Tag>Important</Tag>
             }else{
@@ -55,20 +55,30 @@ function NotificationItem({ data }) {
                 return ''
         }
     }
+
+
     if (data.remaingDays < 0) {
         strike = { textDecorationLine: 'line-through' }
     } else {
         strike = {}
     }
 
-    let eventStatus;
-    if (data.remaingDays === 0) {
-        eventStatus = "Today!"
-    } else if (data.remaingDays > 0 && (data.type !== 'ame' || data.type !== 'soothaka')) {
-        eventStatus = `${data.remaingDays} days remaining`
-    } else if (data.remaingDays <0) {
-        eventStatus = "Event completed!"
+    function eventStatusHandler(){
+        let eventStatus;
+            const daysLeft=data.remaingDays;
+
+            const diff = findDiffBetweenDates(data.date, new Date())
+            if (daysLeft=== 0) {
+                eventStatus = "Today!"
+            } else if (daysLeft >= 0 && (data.type !== 'ame' || data.type !== 'soothaka')) {
+                eventStatus = `${daysLeft} days remaining`
+            } else if (daysLeft <-1) {
+                eventStatus = "Event completed!"
+            }
+        return eventStatus
     }
+
+
     return (
         <Pressable style={styles.pressable} onPress={onPressHandler} android_ripple={{ color: 'red' }}>
             <View style={styles.container}>
@@ -90,7 +100,7 @@ function NotificationItem({ data }) {
                         {
                             data.notificationType === 'event' &&
                             <Text style={[styles.info3, { borderLeftWidth: 1, paddingLeft: 10, borderColor: globalColors.colors.primary200 }]}>
-                                {eventStatus}
+                                {eventStatusHandler()}
                             </Text>}
                     </View>
                 </View>

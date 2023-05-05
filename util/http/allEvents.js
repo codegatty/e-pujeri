@@ -19,8 +19,11 @@ export async function fetchAllEvents(){
         if (data.type === 'ame' || data.type === 'soothaka') {
             const dateInFormat = new Date(data.date)
             const resultDate = moment(dateInFormat, "DD-MM-YYYY").add(16, 'days');
+            let test=findDiffBetweenDates(resultDate,currentDate)
+            
             return [findDiffBetweenDates(resultDate,currentDate),resultDate]
         }else{
+            
             return [findDiffBetweenDates(data.date,currentDate),data.date]
         }
     }
@@ -52,7 +55,7 @@ export async function fetchAllEvents(){
             publishedDate:eventResponse.data[key].publishedDate,
             notificationType:'event',
             isNotified:eventResponse.data[key].isNotified,
-            remaingDays:(remainingDaysFinder(eventResponse.data[key])[0]+1)
+            remaingDays:((remainingDaysFinder(eventResponse.data[key])[0]))
 
             
         }
