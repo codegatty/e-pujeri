@@ -72,7 +72,7 @@ function NotificationItem({ data }) {
                 eventStatus = "Today!"
             } else if (daysLeft >= 0 && (data.type !== 'ame' || data.type !== 'soothaka')) {
                 eventStatus = `${daysLeft} days remaining`
-            } else if (daysLeft <-1) {
+            } else if (daysLeft <0) {
                 eventStatus = "Event completed!"
             }
         return eventStatus

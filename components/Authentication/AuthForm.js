@@ -55,12 +55,14 @@ function AuthForm(){
             <Input label='Email' inputConfig={{
                 keyboardType:'email-address',
                 onChangeText:(value)=>setEmail(value),
-                value:email
+                value:email,
+                autoComplete:'email'
             }}/>
 
             <Input label='password' inputConfig={{
                 onChangeText:(value)=>setPassWord(value),
-                value:password
+                value:password,
+                secureTextEntry:true
             }}/>
             <View style={styles.buttonContainer}>
             <CustomButton onPress={cancelHandler}>Cancel</CustomButton> 

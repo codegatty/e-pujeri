@@ -9,6 +9,7 @@ import { globalColors } from '../../constants/appColors'
 import CustomButton from '../ui/CustomButton';
 import EventType from './EventType';
 import {dateToString} from '../../util/others/dateToString';
+import moment from 'moment';
 
 function EventForm({ onAddEvent, defaultValue, submitButtonTitle ,onSubmit}) {
 
@@ -16,6 +17,8 @@ function EventForm({ onAddEvent, defaultValue, submitButtonTitle ,onSubmit}) {
     const[showDatePicker,setShowDatePicker]=useState(false);
     const [isEnabled, setIsEnabled] = useState(defaultValue?defaultValue.isYearlyEvent:false);
     const [changedThumbColor, setChangedThumbColor] = useState('white');
+
+    let moment=require('moment')
 
     useEffect(()=>{
         setChangedThumbColor(isEnabled ? globalColors.colors.primary300 : 'white')
@@ -71,10 +74,19 @@ function EventForm({ onAddEvent, defaultValue, submitButtonTitle ,onSubmit}) {
             
         }
         else {
-            const data = {
+            /*const data = {
                 event: inputValues.event,
                 about: inputValues.about,
                 date: inputValues.date,
+                isYearlyEvent: inputValues.isYearlyEvent,
+                type: inputValues.type,
+                days:inputValues.days,
+                publishedDate:new Date()
+            }*/
+            const data = {
+                event: inputValues.event,
+                about: inputValues.about,
+                date: inputValues.type==='ame' || inputValues.type==='soothaka'?moment( new Date(inputValues.date),"DD-MM-YYYY").add(16, 'days'):inputValues.date,
                 isYearlyEvent: inputValues.isYearlyEvent,
                 type: inputValues.type,
                 days:inputValues.days,

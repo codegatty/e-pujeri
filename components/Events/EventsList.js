@@ -16,8 +16,13 @@ function EventsList({dataSource}){
     if(allEventCtx.shouldShow==false){
     dataSource=dataSource.filter((items)=>{
         let diff=findDiffBetweenDates(items.date,new Date())
-        return diff<2
+        return diff>=0
     })
+    }else if(allEventCtx.shouldShow===true){
+        dataSource=dataSource.filter((items)=>{
+            let diff=findDiffBetweenDates(items.date,new Date())
+            return diff<0
+        })
     }
 
     function onPressHandler(eventData){

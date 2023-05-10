@@ -18,7 +18,7 @@ export async function fetchAllEvents(){
 
         if (data.type === 'ame' || data.type === 'soothaka') {
             const dateInFormat = new Date(data.date)
-            const resultDate = moment(dateInFormat, "DD-MM-YYYY").add(16, 'days');
+            const resultDate = dateInFormat;
             let test=findDiffBetweenDates(resultDate,currentDate)
             
             return [findDiffBetweenDates(resultDate,currentDate),resultDate]

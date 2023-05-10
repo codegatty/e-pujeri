@@ -17,8 +17,12 @@ function EventItem({data,onPress}) {
 
     function isDisable(){
         if(diff==1||diff==0){
-            return <Button title='Notify' onPress={onPressPushHandler} color={globalColors.colors.primary300}/>
-        }else{
+            let title=diff+" days remaining"
+            return <Button title={title} onPress={onPressPushHandler} color={globalColors.colors.primary300}/>
+        }else if(diff<0){
+            return <Button title='Event Completed' disabled />
+        }
+        else{
             return <Button title='Notify' disabled />
         }
     }
@@ -55,6 +59,6 @@ const styles = StyleSheet.create({
     },
     detail:{
         flex:1,
-    }
+    },
 })
 
